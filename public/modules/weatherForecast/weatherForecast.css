@@ -1,0 +1,88 @@
+    #brandIcon {
+        width: 60px;
+    }
+    .card {
+        min-width: 140px;
+        max-width: 180px;
+        margin-right:10px;
+        margin-bottom:10px;
+    }
+    
+    .cardOn {
+      border:solid 2px black;
+      background-color: #c6cffe;
+    }
+        
+    .card-header {
+        height:80px;
+        padding: 0.4rem !important;
+    }
+    .card-title {
+        margin: auto;
+        margin-bottom: -5px;
+    }
+    .card-img-top {
+        width:50px;
+        margin-top: -10px!important;
+        margin: auto;
+        display: block;
+    }
+    .card-text {
+        margin-bottom: -5px;
+        font-size: 14px;
+        /*margin:auto;*/
+    }
+
+    .card-body {
+        padding: 0.4rem !important;
+        background-color:  #163af0;
+    }
+    .fa-tint, .fa-snowflake {
+        width:10px !important;
+        color:blue;
+        margin-right: 2px;
+    }
+    .weather-data {
+        font-size: 12px;
+    }
+    #closeBtnDiv {
+      text-align: center;
+    }
+    #closeBtn {
+      margin-bottom: 40px;
+      margin-top: 20px;
+    }
+    #leftArrow {
+      font-size: 40px;
+      margin-right: 40px;
+      color: #007bff; /* primary color */
+    }
+    #rightArrow {
+      font-size: 40px;
+      margin-left: 40px;
+      color: #007bff; /* primary color */
+    }
+    .greyArrow {
+      color: grey !important;
+    }
+    #citySelector {
+        margin-top:10px;
+    }
+
+    .sunIcon {
+        width: 30px;
+        margin-left: -5px;
+    }
+    .fa-arrow-up, .fa-arrow-down {
+        width: 10px!important;
+        margin-left: -10px;
+    }
+    .forecastHeader {
+        font-size: 24px;
+    }
+    .sunText {
+        font-size: 14px;
+    }
+    .smallSunText {
+        font-size: 10px;
+    }

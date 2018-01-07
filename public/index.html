@@ -1,0 +1,98 @@
+<!doctype HTML>
+<html lang="en-us" ng-app="kerttuApp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>Kerttu Weather Station</title>
+		
+		<!-- load bootstrap  -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        
+        <!-- socket.io -->
+        <script src="/socket.io/socket.io.js"></script>
+        
+        <!-- load fontawesome  -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+        
+        <style>
+            html, body, input, select, textarea
+            {
+                font-size: 1.05em !important;
+            }
+        </style>
+        
+        <!-- canvas cauges -->
+        <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.4/all/gauge.min.js"></script> 
+        
+		<!-- load angular via CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-route.min.js"></script> 
+
+		<!-- UI Router *** maybe take this into use instead of angular route ****
+		<script src="//unpkg.com/@uirouter/angularjs@1.0.7/release/angular-ui-router.min.js"></script -->
+        
+        <!-- own css -->
+        <link rel="stylesheet" type="text/css" href="modules/ruuvitag/ruuviweather.css">
+        <link rel="stylesheet" type="text/css" href="modules/weatherForecast/weatherForecast.css">
+
+		<!-- Application js -->
+		<script type="text/javascript" src="js/app.js"></script>
+        
+        <!-- gauges -->
+        <script type="text/javascript" src="modules/gauges/outsideTempGauge.js"></script>
+        <script type="text/javascript" src="modules/gauges/outsidePressureGauge.js"></script>
+        <script type="text/javascript" src="modules/gauges/outsideHumidityGauge.js"></script>
+        <script type="text/javascript" src="modules/gauges/insideTempGauge.js"></script>
+        <script type="text/javascript" src="modules/gauges/insidePressureGauge.js"></script>
+        <script type="text/javascript" src="modules/gauges/insideHumidityGauge.js"></script>
+        
+        <!-- constants -->
+        <script type="text/javascript" src="modules/ruuvitag/ruuviweatherConstants.js"></script>
+        <script type="text/javascript" src="modules/weatherForecast/forecastConstants.js"></script>
+        
+        <!-- services -->
+        <script type="text/javascript" src="modules/weatherForecast/cityService.js"></script>
+        
+        <!-- factories -->
+        <script type="text/javascript" src="modules/socket/socketFactory.js"></script>
+        <script type="text/javascript" src="modules/ruuvitag/ruuviweatherFactory.js"></script>
+        <script type="text/javascript" src="modules/weatherForecast/forecastFactory.js"></script>
+        
+        <!-- controllers -->
+        <script type="text/javascript" src="modules/ruuvitag/ruuviweatherController.js"></script>
+        <script type="text/javascript" src="modules/weatherForecast/weatherForecastController.js"></script>
+		
+	</head>
+	<body>
+        <header>
+			<nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;">
+                <div class="navbar-brand">
+                     <img id="brandIcon" src="icons/sunny.png">
+                     <span>Kerttu Weather</span>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" ng-hide="page == 'weather'">
+                            <a class="nav-link" href="#!/weather"><i class="fas fa-thermometer-quarter"></i> Weather</a>
+                        </li>
+                        <li class="nav-item" ng-hide="page == 'forecast'">
+                            <a class="nav-link" href="#!/forecast"><i class="fas fa-thermometer-quarter"></i> Forecast</a>
+                        </li>
+                    </ul>
+                </div>
+			</nav>
+		</header>
+
+        <div class="container" style="max-width:95%;">
+				<div ng-view></div>
+		</div>
+    </body>
+</html>

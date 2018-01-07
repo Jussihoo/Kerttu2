@@ -1,0 +1,164 @@
+ <div class="row" id="citySelector">
+    <div class="col-md-3 col-md-offset-3">
+        <div class="input-group input-group-sm">
+          <input type="text" ng-model="myCity" class="form-control" placeholder="City">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" ng-click="getForecast(myCity)">
+                <i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div>
+    </div>
+</div>
+
+<div class="weekForecast" ng-hide="detailedWeatherForecast">
+    <div class="row">
+        <div class="col-12 col-sm-7 col-lg-4">
+            <div class="forecastHeader">Week forecast for {{ city }}</div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-4">
+            <span class="sunsetSunrise">
+                <img class="sunIcon" src='http://openweathermap.org/img/w/01d.png'>
+                <i class="fas fa-arrow-up"></i>
+                <span class="sunText">{{ convertToDate(sunrise) |date: 'HH:mm' }}</span>
+            </span>
+            <span class="sunsetSunrise">
+                <img class="sunIcon" src='http://openweathermap.org/img/w/01d.png'>
+                <i class="fas fa-arrow-down"></i>
+                <span class="sunText">{{ convertToDate(sunset) |date: 'HH:mm' }}</span>
+                <span class="smallSunText">({{ hourDiff }}h{{ minuteDiff }}min)</span>
+            </span>
+        </div>
+    </div>
+    <div class="row" ng-hide="detailedWeatherForecast">
+        <div ng-repeat="weather in weatherForecast.list" class="col-6 col-sm-4 col-lg-3 col-xl-2">
+          <div class="card" ng-click="getDetailedForecast($index)" ng-mouseover="onCard=true" ng-mouseleave="onCard=false" ng-class="{'cardOn': onCard}">
+                <div class="card-title">
+                  {{ convertToDate(weather.dt) |date: 'EEE dd.MM' }}
+                </div>
+              <div class="card-header bg-white">
+                <img class="card-img-top" src='http://openweathermap.org/img/w/{{ weather.weather[0].icon }}.png'>
+                <p class="card-text">
+                    <span ng-if="weather.rain">
+                        <i class="fa fa-tint"></i><span class="weather-data">{{ weather.rain| number: 2  }}mm</span>
+                    </span>
+                    <span ng-if="weather.snow">
+                        <i class="far fa-snowflake"></i><span class="weather-data">{{ weather.snow| number: 2  }}mm</span>
+                    </span>
+                </p>
+              </div>
+              <div class="card-body text-white">
+                  <p class="card-text">
+                        <span class="weather-data">Day temp:</span>
+                  </p>
+                  <p class="card-text">
+                      <span ng-style="weather.temp.day < 0 && {'color': '#f7fb02'}">
+                        {{ weather.temp.day| number : 1 }} °C
+                      </span>
+                  </p>
+                  <p class="card-text">
+                        <span class="weather-data">Min / Max:</span>
+                  </p>
+                  <p class="card-text">
+                      <span style="margin-right:-4px;" ng-style="weather.temp.min < 0 && {'color': '#f7fb02'}">
+                        {{ weather.temp.min| number : 1 }}
+                      </span>/
+                      <span style="margin-left: -4px;" ng-style="weather.temp.max < 0 && {'color': '#f7fb02'}">
+                        {{ weather.temp.max| number : 1 }}
+                      </span>°C
+                  </p>
+                  <p class="card-text">
+                        <span class="weather-data">Wind speed:</span>
+                  </p>
+                  <p class="card-text">
+                        <i class="fas fa-arrow-alt-circle-up" style="transform: rotate({{ weather.deg+180|number}}deg);"></i>
+                        {{ weather.speed| number : 1 }} m/s
+                  </p>
+                  <p class="card-text">
+                        <span class="weather-data">Humidity:</span>
+                  </p>
+                  <p class="card-text">
+                        <span>{{weather.humidity != 0 ? weather.humidity : 'N/A'}} %</span>
+                  </p>
+                  <p class="card-text">
+                        <span class="weather-data">Air pressure:</span>
+                  </p>
+                  <p class="card-text">
+                        {{ weather.pressure| number : 1 }} hPa
+                  </p>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="detailedForecast" ng-show="detailedWeatherForecast">
+    <h4>detailed forecast for {{ city }} on {{ convertToDate(detailedWeatherForecast[0].dt) |date: 'EEE dd.MM' }}</h4>
+    <div class="row">
+        <div ng-repeat="weather in detailedWeatherForecast" class="col-6 col-sm-4 col-lg-3 col-xl-2">
+          <div class="card" ng-mouseover="onCard=true" ng-mouseleave="onCard=false" ng-class="{'cardOn': onCard}">
+                <div class="card-title">
+                  {{ convertToDate(weather.dt) |date: 'EEE dd.MM HH.mm' }}
+                </div>
+              <div class="card-header bg-white">
+                <img class="card-img-top" src='http://openweathermap.org/img/w/{{ weather.weather[0].icon }}.png'>
+                <p class="card-text">
+                    <span ng-if="weather.rain['3h']">
+                        <i class="fa fa-tint"></i><span class="weather-data">{{ weather.rain['3h']| number: 2  }} mm</span>
+                    </span>
+                    <span ng-if="weather.snow['3h']">
+                        <i class="far fa-snowflake"></i><span class="weather-data">{{ weather.snow['3h']| number: 2  }} mm</span>
+                    </span>
+                  </p>
+              </div>
+              <div class="card-body text-white">
+                  <p class="card-text">
+                        <span class="weather-data">Day temp:</span>
+                  </p>
+                  <p class="card-text">
+                      <span ng-style="weather.main.temp < 0 && {'color': '#f7fb02'}">
+                        {{ weather.main.temp| number: 1 }} °C
+                      </span>
+                  </p>
+                  <p class="card-text">
+                        <span class="weather-data">Min / Max:</span>
+                  </p>
+                  <p class="card-text">
+                      <span style="margin-right:-4px;" ng-style="weather.main.temp_min < 0 && {'color': '#f7fb02'}">
+                        {{ weather.main.temp_min| number: 1 }}
+                      </span>/
+                      <span style="margin-left: -4px;" ng-style="weather.main.temp_max < 0 && {'color': '#f7fb02'}">
+                        {{ weather.main.temp_max| number: 1 }}
+                      </span>°C
+                  </p>
+                  <p class="card-text">
+                        <span class="weather-data">Wind speed:</span>
+                  </p>
+                  <p class="card-text">
+                        <i class="fas fa-arrow-alt-circle-up" style="transform: rotate({{ weather.wind.deg+180|number}}deg);"></i>
+                        {{ weather.wind.speed| number: 1 }} m/s
+                  </p>
+                  <p class="card-text">
+                        <span class="weather-data">Humidity:</span>
+                  </p>
+                  <p class="card-text">
+                        <span>{{weather.main.humidity != 0 ? weather.main.humidity : 'N/A'}} %</span>
+                  </p>
+                  <p class="card-text">
+                        <span class="weather-data">Air pressure:</span>
+                  </p>
+                  <p class="card-text">
+                        {{ weather.main.pressure| number: 1 }} hPa
+                  </p>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-12" id="closeBtnDiv" ng-show="detailedWeatherForecast">
+        <span id="leftArrow" ng-class="{'greyArrow': detailedPage == 0}" ng-click="changeDetailedPage(-1)"><i class="fas fa-arrow-circle-left"></i></span>
+        <button id="closeBtn" type="button" class="btn btn-primary" ng-click="detailedWeatherForecast=null">Go back</button>
+        <span id="rightArrow" ng-class="{'greyArrow': detailedPage == lastIndex}" ng-click="changeDetailedPage(1)"><i class="fas fa-arrow-circle-right"></i></span>
+      </div>
+    </div>
+</div>

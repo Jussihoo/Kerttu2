@@ -1,0 +1,16 @@
+{
+	"name": "Kerttu2",
+	"version" : "0.0.1",
+	"main" : "bin/server.js",
+	"dependencies" : {
+		"express" : ">=4.14.0",
+		"mongoose": ">=4.6.0",
+		"body-parser" : ">=1.9.2",
+		"method-override" : ">=2.3.6",
+        "socket.io": ">=2.0.0"
+        
+	},
+	"scripts" : {
+		"start" : "node bin/server.js"
+	}
+}

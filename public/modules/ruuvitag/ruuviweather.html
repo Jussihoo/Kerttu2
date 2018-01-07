@@ -1,0 +1,45 @@
+
+  <div id="outside">
+    <h3>Outside weatherData</h3>
+    <td><div id="ruuvi_timestamp">{{ convertToDate(outside.temperature.timestamp) |date: 'EEE dd.MM HH:mm' }}</div></td>
+    <div class="col-12 col-lg-9">
+        <div class="row">
+            <div class="col-12 col-sm-4 col-lg-4">
+                <canvas id="outsideTempGauge"></canvas>    
+            </div>
+            <div class="col-12 col-sm-4 col-lg-4">
+                <canvas id="outsideHumidityGauge"></canvas>    
+            </div>
+            <div class="col-12 col-sm-4 col-lg-4">
+                <canvas id="outsidePressureGauge"></canvas>    
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div="inside">
+    <h3>inside weatherData</h3>
+    <td><div id="ruuvi_timestamp">{{ convertToDate(downstairs.temperature.timestamp) |date: 'EEE dd.MM HH:mm' }}</div></td>
+    <div class="col-12 col-lg-9">
+        <div class="row">
+        <div class="col-12 col-sm-4 col-lg-4">
+            <canvas id="insideTempGauge"></canvas>    
+        </div>
+        <div class="col-12 col-sm-4 col-lg-4">
+            <canvas id="insideHumidityGauge"></canvas>    
+        </div>
+        <div class="col-12 col-sm-4 col-lg-4">
+            <canvas id="insidePressureGauge"></canvas>    
+        </div>
+    </div>
+  </div>
+
+
+<script>
+    initOutsideTempGauge();
+    initOutsideHumidityGauge();
+    initOutsidePressureGauge();
+    initInsideTempGauge();
+    initInsideHumidityGauge();
+    initInsidePressureGauge();
+</script>
