@@ -7,6 +7,7 @@ function initInsideTempGauge() {
         height: 190,
         minValue: 5,
         maxValue: 35,
+        minorTicks: 5,
         majorTicks: ['5','10','15','20','25', '30', '35'],
         highlights: [
             { from: 5, to: 18, color: 'rgba(0,102,255,.5)' },
