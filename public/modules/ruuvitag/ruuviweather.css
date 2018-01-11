@@ -1,7 +1,17 @@
-#brandIcon {
-        width: 60px;
-}
 
 #ruuvi_timestamp {
     font-size: 11px;
+}
+
+.locationHeader {
+    font-size: 18px;
+    color: deepskyblue;
+}
+
+#outside {
+    margin-top:40px;
+}
+
+#inside {
+    margin-top: 20px;
 }

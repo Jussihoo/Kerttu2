@@ -37,6 +37,7 @@
 		<script src="//unpkg.com/@uirouter/angularjs@1.0.7/release/angular-ui-router.min.js"></script -->
         
         <!-- own css -->
+        <link rel="stylesheet" type="text/css" href="css/app.css">
         <link rel="stylesheet" type="text/css" href="modules/ruuvitag/ruuviweather.css">
         <link rel="stylesheet" type="text/css" href="modules/weatherForecast/weatherForecast.css">
 
@@ -70,21 +71,21 @@
 	</head>
 	<body>
         <header>
-			<nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;">
+			<nav class="navbar navbar-expand-sm navbar-light">
                 <div class="navbar-brand">
                      <img id="brandIcon" src="icons/sunny.png">
-                     <span>Kerttu Weather</span>
+                     <span id="brandName">Kerttu Weather</span>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <button id="navbar-toggle-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse navbar-right" id="myNavbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item" ng-hide="page == 'weather'">
-                            <a class="nav-link" href="#!/weather"><i class="fas fa-thermometer-quarter"></i> Weather</a>
+                            <a class="nav-link" href="#!/weather" data-toggle="collapse" data-target="#myNavbar"><i class="fas fa-thermometer-quarter"></i> Weather</a>
                         </li>
                         <li class="nav-item" ng-hide="page == 'forecast'">
-                            <a class="nav-link" href="#!/forecast"><i class="fas fa-thermometer-quarter"></i> Forecast</a>
+                            <a class="nav-link" href="#!/forecast" data-toggle="collapse" data-target="#myNavbar"><i class="fas fa-thermometer-quarter"></i> Forecast</a>
                         </li>
                     </ul>
                 </div>

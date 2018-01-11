@@ -1,1 +1,28 @@
-/* public/css/app.css */
+.navbar {
+    //background-color: #e3f2fd;
+    background-color: blue;
+}
+
+.navbar-brand {
+    width: 40%;
+}
+
+.nav-link {
+    color: white!important;
+}
+
+#navbar-toggle-button {
+    background-color: white;
+}
+
+#brandIcon {
+    width: 20%;
+    vertical-align: middle;
+    min-width: 45px;
+}
+
+#brandName {
+    font-size: calc(0.5em + 2.5vw);
+    color: white;
+    margin-left: 10px;
+}
