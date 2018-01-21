@@ -12,7 +12,9 @@
             RUUVITAG_LOCATION_INSIDE_UPSTAIRS: 3,
             RUUVITAG_LOCATION_UNKNOWN: 256,
             BASE_URL: 'http://localhost:8041/api/v1/weatherData',
-            SOCKET_URL: 'http://localhost:8041'
+            SOCKET_URL: 'http://localhost:8041',
+            PRESSURE_CALIBRATION_FACTOR: 8,
+            TEMPERATURE_CALIBRATION_FACTOR: -1
          })
     
 }());

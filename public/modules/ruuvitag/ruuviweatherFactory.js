@@ -20,7 +20,9 @@
             getTemperature: getTemperatureData,
             getHumidity: getHumidityData,
             getPressure: getPressureData,
-            getAll: getAllData
+            getAll: getAllData,
+            calibratePressure: getCalibratedPressure,
+            calibrateTemperature: getCalibratedTemperature
 		};
 
 	  return factoryObject;
@@ -40,6 +42,14 @@
     function getAllData(params){
         return _getData(params);
     };
+        
+    function getCalibratedPressure(pressure){
+        return _getCalibPressure(pressure)
+    }
+        
+    function getCalibratedTemperature(temperature){
+        return _getCalibTemperature(temperature)
+    }
         
     // internal function
     function _getData(params) {
@@ -61,5 +71,13 @@
         deferred.reject(err);
       };
     };
+        
+    function _getCalibPressure(pressure){
+        return pressure+constants.PRESSURE_CALIBRATION_FACTOR;
+    }
+    
+    function _getCalibTemperature(temperature){
+        return temperature+constants.TEMPERATURE_CALIBRATION_FACTOR;
+    }
   };
 }());

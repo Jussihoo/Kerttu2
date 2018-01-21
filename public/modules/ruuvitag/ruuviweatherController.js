@@ -31,14 +31,14 @@
           weatherFragment['devLoc'] = freshWeatherData.devLoc;
 
           if (freshWeatherData.temperature) {
-            weatherFragment.temperature.temperature = freshWeatherData.temperature;
+            weatherFragment.temperature.temperature = ruuvi.calibrateTemperature(freshWeatherData.temperature);
             weatherFragment.temperature.timestamp = freshWeatherData.time;
           }
           if (freshWeatherData.humidity){
             weatherFragment.humidity.humidity = freshWeatherData.humidity;
           }
           if (freshWeatherData.pressure){
-            weatherFragment.pressure.pressure = freshWeatherData.pressure;
+            weatherFragment.pressure.pressure = ruuvi.calibratePressure(freshWeatherData.pressure);
           }
           if (freshWeatherData.battery){
             weatherFragment.battery.voltage = freshWeatherData.battery;
@@ -78,15 +78,15 @@
         function onAllSuccess(weatherData){
             if (weatherData.temperature.devLoc == constants.RUUVITAG_LOCATION_OUTSIDE){
                 $scope.outside = weatherData;
-                outsideTempGauge.value = weatherData.temperature.temperature;
+                outsideTempGauge.value = ruuvi.calibrateTemperature(weatherData.temperature.temperature);
                 outsideHumidityGauge.value = weatherData.humidity.humidity;
-                outsidePressureGauge.value = weatherData.pressure.pressure;
+                outsidePressureGauge.value = ruuvi.calibratePressure(weatherData.pressure.pressure);
             }
             else if (weatherData.temperature.devLoc == constants.RUUVITAG_LOCATION_INSIDE_DOWNSTAIRS){
                 $scope.downstairs = weatherData;
-                insideTempGauge.value = weatherData.temperature.temperature;
+                insideTempGauge.value = ruuvi.calibrateTemperature(weatherData.temperature.temperature);
                 insideHumidityGauge.value = weatherData.humidity.humidity;
-                insidePressureGauge.value = weatherData.pressure.pressure;
+                insidePressureGauge.value = ruuvi.calibratePressure(weatherData.pressure.pressure);
             } 
             else if (weatherData.temperature.devLoc == constants.RUUVITAG_LOCATION_INSIDE_UPSTAIRS){
                 $scope.upstairs = weatherData;    
