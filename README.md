@@ -1,6 +1,18 @@
 # Kerttu 2
 
-Weather station based on Ruuvitags, Raspberry PI 3 B, MEAN, AWS and the lovely Finnish weather 
+Weather station based on Ruuvitags, Raspberry PI 3 B, MEAN, AWS and the lovely Finnish weather
+
+<br>
+  <img width="300" src="https://github.com/Jussihoo/Kerttu2/blob/master/images/weather_screenshot_computer.PNG"
+</br>
+
+<br>
+  <img width="300" src="https://github.com/Jussihoo/Kerttu2/blob/master/images/forecast_screenshot_computer.PNG"
+</br>
+
+<br>
+  <img width="300" src="https://github.com/Jussihoo/Kerttu2/blob/master/images/weather_screenshot_phone.png"
+</br>
 
 ## Configuring the Ruuvitag bluetooth beacons
 
