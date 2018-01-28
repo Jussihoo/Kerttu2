@@ -51,10 +51,18 @@ def handle_inside_data(found_data):
   send_data(settings.LOC_ID_2, found_data)
   run_flag_inside.running = False
   return
+
+def cancel_measurements():
+  # stop waiting for sensor datas in case
+  # ruuvitag is broken or out or range or out of juice
+  run_flag_outside.running = False
+  run_flag_inside.running = False
   
 def get_measurements():
   run_flag_outside.running = True
   run_flag_inside.running = True
+  t2 = threading.Timer(settings.SUPERVISION_PERIOD, cancel_measurements)
+  ts.start()
   RuuviTagSensor.get_datas(handle_outside_data, settings.RUUVI_OUTSIDE, run_flag_outside)
   RuuviTagSensor.get_datas(handle_inside_data, settings.RUUVI_INSIDE, run_flag_inside)
   t1 = threading.Timer(settings.MEASUREMENT_INTERVAL, get_measurements)
