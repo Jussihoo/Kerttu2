@@ -28,9 +28,9 @@ To be added...
 Go to /home/pi/Documents/Kerttu2
 Start the ruuvireader.py with this command:
 
-nohup python ruuvireader.py > ruuvi.log &
+nohup python -u ruuvireader.py > ruuvi.out 2> ruuvi.err < /dev/null &
 
-The logs can be read from ruuvi.log
+The logs can be read from ruuvi.out and error log from ruuvi.err
 
 ### Stop ruuvireader
 
@@ -58,4 +58,4 @@ Install `Forever` if not installed already and then type `forever start -c "npm 
 
 ### how to stop the server on AWS
 
-Add instructions...
+Type command `ps aux | grep 'forever\|node'` to get the two processes for the server and then kill those 
