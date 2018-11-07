@@ -10,7 +10,7 @@
     graphService.$inject = ['constants'];
                  
     function graphService(constants){
-        this.newTemperatureValue;
+        this.newWeatherMeasurement;
         this.dateRange = {start: null, end: null};
         this.device = constants.RUUVITAG;
         this.devLoc = constants.RUUVITAG_LOCATION_OUTSIDE;
