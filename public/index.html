@@ -27,11 +27,22 @@
         </style>
         
         <!-- canvas cauges -->
-        <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.4/all/gauge.min.js"></script> 
+        <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.4/all/gauge.min.js"></script>
+        
+        <!-- Highcharts -->
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <!--<script src="https://code.highcharts.com/modules/series-label.js"></script>-->
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
         
 		<!-- load angular via CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-route.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-route.min.js"></script>
+        
+        <!-- load angular Material via CND -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.6/angular-material.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.6/angular-material.min.js"></script>
 
 		<!-- UI Router *** maybe take this into use instead of angular route ****
 		<script src="//unpkg.com/@uirouter/angularjs@1.0.7/release/angular-ui-router.min.js"></script -->
@@ -40,6 +51,7 @@
         <link rel="stylesheet" type="text/css" href="css/app.css">
         <link rel="stylesheet" type="text/css" href="modules/ruuvitag/ruuviweather.css">
         <link rel="stylesheet" type="text/css" href="modules/weatherForecast/weatherForecast.css">
+        <link rel="stylesheet" type="text/css" href="modules/graphSelComponent/graphSelComponent.css">
 
 		<!-- Application js -->
 		<script type="text/javascript" src="js/app.js"></script>
@@ -56,8 +68,13 @@
         <script type="text/javascript" src="modules/ruuvitag/ruuviweatherConstants.js"></script>
         <script type="text/javascript" src="modules/weatherForecast/forecastConstants.js"></script>
         
+        <!-- components -->
+        <script type="text/javascript" src="modules/graphSelComponent/graphSelComponent.js"></script>
+        <script type="text/javascript" src="modules/graphComponent/graphComponent.js"></script>
+        
         <!-- services -->
         <script type="text/javascript" src="modules/weatherForecast/cityService.js"></script>
+        <script type="text/javascript" src="modules/graphComponent/graphService.js"></script>
         
         <!-- factories -->
         <script type="text/javascript" src="modules/socket/socketFactory.js"></script>
@@ -67,6 +84,7 @@
         <!-- controllers -->
         <script type="text/javascript" src="modules/ruuvitag/ruuviweatherController.js"></script>
         <script type="text/javascript" src="modules/weatherForecast/weatherForecastController.js"></script>
+        
 		
 	</head>
 	<body>

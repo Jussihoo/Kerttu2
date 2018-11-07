@@ -15,3 +15,13 @@
 #inside {
     margin-top: 20px;
 }
+
+#graph {
+    margin-top: 20px;
+}
+
+.graphHeader {
+    font-size: 18px;
+    color: deepskyblue;
+    margin-bottom: 20px;
+}

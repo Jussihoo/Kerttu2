@@ -62,7 +62,7 @@
       ///////////////
       
       function onDataReceived(resp) {
-        console.log(resp.data);
+        //console.log(resp.data);
         deferred.resolve(resp.data);
       };
       

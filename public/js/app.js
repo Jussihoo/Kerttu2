@@ -1,11 +1,12 @@
 
-angular.module('kerttuApp', ['ngRoute'])
+angular.module('kerttuApp', ['ngRoute','ngMaterial'])
 
-    //Routes
+    // configurate the DatePicker's date format
+    .config(formatDatePicker)
+    // configure Routes
     .config(routeMachine);
 
-    routeMachine.$inject = ['$routeProvider'];
-        
+    routeMachine.$inject = ['$routeProvider'];        
     function routeMachine($routeProvider) {
 
         $routeProvider
@@ -22,3 +23,14 @@ angular.module('kerttuApp', ['ngRoute'])
             controller: 'forecastController'
 	    })
     }
+
+    // format the date for the Date picker
+    function formatDatePicker($mdDateLocaleProvider){
+        $mdDateLocaleProvider.formatDate = function(date) {
+            var day = date.getDate();
+            var month = date.getMonth()+1;
+            var year = date.getFullYear();
+            return day + '.' + month + '.' + year;
+        }
+    }
+

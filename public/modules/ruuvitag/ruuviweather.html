@@ -22,15 +22,25 @@
     <div id="ruuvi_timestamp">{{ convertToDate(downstairs.temperature.timestamp) |date: 'EEE dd.MM HH:mm' }}</div>
     <div class="col-12 col-lg-9">
         <div class="row">
-        <div class="col-12 col-sm-4 col-lg-4" align="center">
-            <canvas id="insideTempGauge"></canvas>    
+            <div class="col-12 col-sm-4 col-lg-4" align="center">
+                <canvas id="insideTempGauge"></canvas>    
+            </div>
+            <div class="col-12 col-sm-4 col-lg-4" align="center">
+                <canvas id="insideHumidityGauge"></canvas>    
+            </div>
+            <div class="col-12 col-sm-4 col-lg-4" align="center">
+                <canvas id="insidePressureGauge"></canvas>    
+            </div>
         </div>
-        <div class="col-12 col-sm-4 col-lg-4" align="center">
-            <canvas id="insideHumidityGauge"></canvas>    
-        </div>
-        <div class="col-12 col-sm-4 col-lg-4" align="center">
-            <canvas id="insidePressureGauge"></canvas>    
-        </div>
+    </div>
+  </div>
+
+  <div id="graph">
+    <div class="graphHeader">Graph</div>
+      <div class="col-12 col-lg-9">
+        <graph-component></graph-component>
+        <graph-selector-component></graph-selector-component>
+      </div>
     </div>
   </div>
 

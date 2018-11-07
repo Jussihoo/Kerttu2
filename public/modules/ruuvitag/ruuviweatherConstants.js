@@ -14,7 +14,11 @@
             BASE_URL: 'http://localhost:8041/api/v1/weatherData',
             SOCKET_URL: 'http://localhost:8041',
             PRESSURE_CALIBRATION_FACTOR: 8,
-            TEMPERATURE_CALIBRATION_FACTOR: -1
+            TEMPERATURE_CALIBRATION_FACTOR: -1,
+            TYPE_TEMPERATURE: "temperature",
+            TYPE_PRESSURE: "pressure",
+            TYPE_HUMIDITY: "humidity",
+            TYPE_BATTERY: "battery"
          })
     
 }());

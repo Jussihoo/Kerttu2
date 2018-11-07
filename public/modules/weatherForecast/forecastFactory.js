@@ -66,11 +66,9 @@
       var deferred = $q.defer();
       
       if(factoryObject.detailedForecastData){
-        console.log("I have data");
         deferred.resolve(factoryObject.detailedForecastData);
       }
       else {
-        console.log("let's get fresh data");
         var baseUrl = "http://api.openweathermap.org/data/2.5/forecast";
         _getForecast(baseUrl,params).then(onSuccess, onError);
       }
@@ -79,7 +77,6 @@
       
       /////////////
       function onSuccess(resp) {
-        console.log("success");
         console.log(resp);
         factoryObject.detailedForecastData = resp;
         deferred.resolve(resp);

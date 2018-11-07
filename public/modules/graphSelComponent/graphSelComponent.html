@@ -1,0 +1,31 @@
+<div class="predefined-buttons">
+    <button type="button" class="btn btn-outline-primary btn-sm col-2" ng-click="vm.updateGraph(12)">12h</button>
+    <button type="button" class="btn btn-outline-primary btn-sm col-2" ng-click="vm.updateGraph(24)">1d</button>
+    <button type="button" class="btn btn-outline-primary btn-sm col-2" ng-click="vm.updateGraph(48)">2d</button>
+    <button type="button" class="btn btn-outline-primary btn-sm col-2" ng-click="vm.updateGraph(120)">5d</button>
+    <button type="button" class="btn btn-outline-primary btn-sm col-2" ng-click="vm.updateGraph(168)">7d</button>
+</div>
+<div class="timeframe-selector row justify-content-center">
+    <div>
+        <md-datepicker ng-model="vm.startDate"
+                       ng-change="vm.startDateChanged()"
+                       ng-focus="vm.setToday(0)"
+                       md-max-date="vm.maxDate"
+                       md-open-on-focus>
+        </md-datepicker>
+    </div>
+    <div>
+        <md-datepicker ng-model="vm.endDate"
+                       ng-change="vm.finishDateChanged()"
+                       ng-focus="vm.setToday(1)"
+                       md-min-date="vm.minDate"
+                       md-open-on-focus>
+        </md-datepicker>
+    </div>
+    <div>
+        <span class="measurement-sel">
+            <select ng-model="vm.selectedMeasurement" ng-change="vm.typeChanged()" ng-options="x.name for x in vm.measurements"></select>
+        <span>
+        <button type="button" class="btn btn-primary btn-sm draw-btn" ng-click="vm.getDateRange()">Draw graph</button>
+    </div>
+</div>

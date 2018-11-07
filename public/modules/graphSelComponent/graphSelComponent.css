@@ -1,0 +1,29 @@
+.md-datepicker-calendar-icon {
+    color: red;
+}
+
+.md-datepicker-input-container {
+    border-bottom-style: none!important;
+}
+
+.md-datepicker-input {
+    font-size: 1.02rem!important;
+}
+
+.predefined-buttons {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.timeframe-selector {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.measurement-sel {
+    margin-left: 20px;
+}
+
+.draw-btn {
+    margin-left: 20px;
+}
