@@ -11,10 +11,14 @@
         });
     
         // Manual Dependency injection
-	    graphSelComponentController.$inject = ['graphService', '$mdDateLocale','$filter', 'constants'];
+	    graphSelComponentController.$inject = ['$scope', 'graphService', '$mdDateLocale','$filter', 'constants'];
     
-        function graphSelComponentController(graphService, $mdDateLocale,$filter, constants) {
+        function graphSelComponentController($scope, graphService, $mdDateLocale,$filter, constants) {
             var vm = this;
+            
+            vm.disableDatePicker = false;
+            vm.disableButton = false;
+            
             vm.startDate = null;
             vm.endDate = null;
             vm.measurements = [{loc: constants.RUUVITAG_LOCATION_OUTSIDE,
@@ -53,6 +57,8 @@
             vm.selectedMeasurement = vm.measurements[0];
             
             vm.updateGraph = function(hours) {
+                graphService.buttonDisabled = true;
+                graphService.datePickerDisabled = true;
                 graphService.device = vm.selectedMeasurement.device;
                 graphService.devLoc = vm.selectedMeasurement.loc;
                 graphService.type = vm.selectedMeasurement.type;
@@ -85,6 +91,8 @@
             }
             
             vm.getDateRange = function(){
+                graphService.datePickerDisabled = true;
+                graphService.buttonDisabled = true;
                 var startDate = vm.startDate;
                 // set endDate by picking only date and ignoring time
                 var endDate = vm.endDate;
@@ -103,6 +111,20 @@
             
             vm.setToday(0);
             vm.setToday(1);
+            
+            // toggle button
+            $scope.$watch(function () {
+                return graphService.datePickerDisabled;
+            }, function (datePickerDisabled) {
+                vm.disableDatePicker = datePickerDisabled;
+            });
+            
+            // toggle button
+            $scope.$watch(function () {
+                return graphService.buttonDisabled;
+            }, function (buttonDisabled) {
+                vm.disableButton = buttonDisabled;
+            });
         }
         
 }());

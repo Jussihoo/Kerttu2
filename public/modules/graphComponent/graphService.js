@@ -16,5 +16,7 @@
         this.devLoc = constants.RUUVITAG_LOCATION_OUTSIDE;
         this.type = constants.TYPE_TEMPERATURE;
         this.hours = 12;
+        this.buttonDisabled = false;
+        this.datePickerDisabled = false;
     };
 }());

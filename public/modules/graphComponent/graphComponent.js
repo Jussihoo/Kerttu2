@@ -16,6 +16,12 @@
         function graphComponentController($scope, ruuvi, constants, graphService) {
             var vm = this;
             
+            Highcharts.setOptions({
+                time: {
+                    useUTC: false
+                }
+            });
+            
             // create chart and set chart options
             vm.chart = Highcharts.chart('container', {
                 chart: {
@@ -164,9 +170,13 @@
                         //console.info("I got no data");
                     }
                     vm.chart.series[0].setData(dataArray, true);
+                    graphService.buttonDisabled = false;
+                    graphService.datePickerDisabled = false;
                 };
 
                 function onAllError(err){
+                    graphService.buttonDisabled = false;
+                    graphService.datePickerDisabled = false;
                     console.warn(err);
                 }
             };
@@ -192,8 +202,6 @@
                         else if (graphService.type == constants.TYPE_BATTERY) {
                             data = weatherObject.battery.voltage;
                         }
-                    console.log( "yyy " + data);
-                    console.dir(weatherObject);
                         vm.chart.series[0].addPoint({
                                                         x: timestamp,
                                                         y: data

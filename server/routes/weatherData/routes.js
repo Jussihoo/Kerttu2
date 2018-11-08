@@ -16,9 +16,25 @@ var Battery = require('./batteryModel');
 // fetch the weatherData from the database
 router.get('/', function(req, res, next) {
     var type = req.query.type;
+    var shrinkRounds = 0;
     if (req.query.hours !== undefined) {
         var hours = Number(req.query.hours);
+        
+        if (hours <= 12) {
+            shrinkRounds = 0;    
+        }
+        else if (hours > 12 && hours <= 24 ) {
+            shrinkRounds = 1;
+        }
+        else if (hours > 24 && hours <= 48 ) {
+            shrinkRounds = 2;    
+        }
+        else if (hours > 48) {
+            shrinkRounds = 3;
+        }
     }
+    
+    
     var startDate = req.query.startDate;
     var endDate = req.query.endDate;
     var device = Number(req.query.device);
@@ -67,7 +83,35 @@ router.get('/', function(req, res, next) {
                     exec(handleResponse);
             }
         }
-        else if(startDate !== undefined && endDate !== undefined){
+        else if(startDate !== undefined && endDate !== undefined) {
+            var oneDay=1000*60*60*24; // day in milliseconds
+            var timeDiffInDays = Math.round((endDate - startDate)/oneDay);
+            
+            if (timeDiffInDays <= 1 ) {
+                shrinkRounds = 1;    
+            }
+            else if (timeDiffInDays > 1 && timeDiffInDays >= 2 ) {
+                shrinkRounds = 2;    
+            }
+            else if (timeDiffInDays > 2 && timeDiffInDays <= 7 ) {
+                shrinkRounds = 3;    
+            }
+            else if (timeDiffInDays > 7 && timeDiffInDays <= 30 ) {
+                shrinkRounds = 4;    
+            }
+            else if (timeDiffInDays > 30 && timeDiffInDays <= 90 ) {
+                shrinkRounds = 5;    
+            }
+            else if (timeDiffInDays > 90 && timeDiffInDays <= 180 ) {
+                shrinkRounds = 6;    
+            }
+            else if (timeDiffInDays > 180 && timeDiffInDays <= 360 ) {
+                shrinkRounds = 7;    
+            }
+            else if (timeDiffInDays > 360 ) {
+                shrinkRounds = 8;    
+            }
+            
             model.
                 find(findParams).
                 where({timestamp: {$gte: new Date(Number(startDate)), $lte: new Date(Number(endDate))}}).
@@ -82,6 +126,17 @@ router.get('/', function(req, res, next) {
             res.status(400).send({error: err});
             return;
         }
+        // shrink data received from database
+        // on each for loop drop every other measurement
+        var index;
+        for (var i=0;i<shrinkRounds;i++){
+            index = data.length;
+            while (index--) {
+              (index + 1) % 2 === 0 && data.splice(index-1, 1);
+            }
+            index = data.length;
+        }
+        
         if(type=='all' && dataCounter==0) { // temperature data returned
             if (data){
                 measurements['temperature'] = data;
