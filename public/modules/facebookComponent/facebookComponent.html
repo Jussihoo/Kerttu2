@@ -1,0 +1,23 @@
+<div class="fb-page"
+     data-href= "{{ vm.fbPageUrl }}"
+     data-tabs="timeline"
+     data-height="400"
+     data-small-header="true"
+     data-adapt-container-width="true"
+     data-hide-cover="false"
+     data-show-facepile="false">
+    <blockquote cite="{{ vm.fbPageUrl }}" class="fb-xfbml-parse-ignore">
+        <a href="{{ vm.fbPageUrl }}"></a>
+    </blockquote>
+</div>
+
+<div id="fb-root"></div>
+<script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/fi_FI/sdk.js#xfbml=1&version=v3.2&appId={{ vm.fbAppId }}&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

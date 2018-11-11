@@ -2,7 +2,7 @@
   <div id="outside">
     <div class="locationHeader">Outdoors</div>
     <td><div id="ruuvi_timestamp">{{ convertToDate(outside.temperature.timestamp) |date: 'EEE dd.MM HH:mm' }}</div></td>
-    <div class="col-12 col-lg-9">
+    <div class="col-12 col-lg-8">
         <div class="row">
             <div class="col-12 col-sm-4 col-lg-4" align="center">
                 <canvas id="outsideTempGauge"></canvas>    
@@ -20,16 +20,23 @@
   <div id="inside">
     <div class="locationHeader">Indoors</div>
     <div id="ruuvi_timestamp">{{ convertToDate(downstairs.temperature.timestamp) |date: 'EEE dd.MM HH:mm' }}</div>
-    <div class="col-12 col-lg-9">
-        <div class="row">
-            <div class="col-12 col-sm-4 col-lg-4" align="center">
-                <canvas id="insideTempGauge"></canvas>    
+    <div class="row">
+        <div class="col-12 col-lg-8">
+            <div class="row">
+                <div class="col-12 col-sm-4 col-lg-4" align="center">
+                    <canvas id="insideTempGauge"></canvas>    
+                </div>
+                <div class="col-12 col-sm-4 col-lg-4" align="center">
+                    <canvas id="insideHumidityGauge"></canvas>    
+                </div>
+                <div class="col-12 col-sm-4 col-lg-4" align="center">
+                    <canvas id="insidePressureGauge"></canvas>    
+                </div>
             </div>
-            <div class="col-12 col-sm-4 col-lg-4" align="center">
-                <canvas id="insideHumidityGauge"></canvas>    
-            </div>
-            <div class="col-12 col-sm-4 col-lg-4" align="center">
-                <canvas id="insidePressureGauge"></canvas>    
+        </div>
+        <div class="d-none d-lg-block col-lg-4">
+            <div class="facebookDiv">
+                <facebook-component></facebook-component>
             </div>
         </div>
     </div>
@@ -43,6 +50,16 @@
       </div>
     </div>
   </div>
+
+  <div class="d-lg-none col-12">
+      <div class=facebookDivSmall>
+          <center>
+            <facebook-component></facebook-component>
+          </center>
+      </div>
+  </div>
+
+  <div class="footerDiv"></div>
 
 
 <script>

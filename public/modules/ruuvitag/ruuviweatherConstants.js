@@ -18,7 +18,9 @@
             TYPE_TEMPERATURE: "temperature",
             TYPE_PRESSURE: "pressure",
             TYPE_HUMIDITY: "humidity",
-            TYPE_BATTERY: "battery"
+            TYPE_BATTERY: "battery",
+            FB_PAGE_URL: "my-facebook-page-url",
+            FB_APP_ID: 0
          })
     
 }());
