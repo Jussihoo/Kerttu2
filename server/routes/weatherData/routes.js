@@ -90,7 +90,7 @@ router.get('/', function(req, res, next) {
             if (timeDiffInDays <= 1 ) {
                 shrinkRounds = 1;    
             }
-            else if (timeDiffInDays > 1 && timeDiffInDays >= 2 ) {
+            else if (timeDiffInDays > 1 && timeDiffInDays <= 2 ) {
                 shrinkRounds = 2;    
             }
             else if (timeDiffInDays > 2 && timeDiffInDays <= 7 ) {
@@ -99,17 +99,8 @@ router.get('/', function(req, res, next) {
             else if (timeDiffInDays > 7 && timeDiffInDays <= 30 ) {
                 shrinkRounds = 4;    
             }
-            else if (timeDiffInDays > 30 && timeDiffInDays <= 90 ) {
+            else if (timeDiffInDays > 30) {
                 shrinkRounds = 5;    
-            }
-            else if (timeDiffInDays > 90 && timeDiffInDays <= 180 ) {
-                shrinkRounds = 6;    
-            }
-            else if (timeDiffInDays > 180 && timeDiffInDays <= 360 ) {
-                shrinkRounds = 7;    
-            }
-            else if (timeDiffInDays > 360 ) {
-                shrinkRounds = 8;    
             }
             
             model.
