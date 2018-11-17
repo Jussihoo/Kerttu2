@@ -11,84 +11,15 @@
         });
     
         // Manual Dependency injection
-	   graphComponentController.$inject = ['$scope', 'ruuvi', 'constants', 'graphService'];
+	   graphComponentController.$inject = ['$scope', 'ruuvi', 'constants',
+                                           'graphService', 'graphComponentOptions'];
     
-        function graphComponentController($scope, ruuvi, constants, graphService) {
+        function graphComponentController($scope, ruuvi, constants,
+                                           graphService, graphComponentOptions) {
             var vm = this;
             
-            Highcharts.setOptions({
-                time: {
-                    useUTC: false
-                }
-            });
-            
-            // create chart and set chart options
-            vm.chart = Highcharts.chart('container', {
-                chart: {
-                    zoomType: 'x'
-                },
-                title: {
-                    text: 'Temperature'
-                },
-
-                subtitle: {
-                    text: 'Source: Kerttu'
-                },
-
-                yAxis: {
-                    title: {
-                        text: '°C degrees'
-                    }
-                },
-                xAxis: {
-                    type: 'datetime',
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle'
-                },
-
-                plotOptions: {
-                    series: {
-                        label: {
-                            connectorAllowed: false
-                        }
-                    }
-                },
-                tooltip: {
-                    valueDecimals: 1    
-                },
-                
-                series: [{
-                    data: [],
-                    zones: [
-                            {
-                                value: 0,
-                                color: '#7cb5ec'
-                            },
-                            {
-                                value: 100,
-                                color: '#FF0000'
-                            }
-                           ],
-                }],
-                responsive: {
-                    rules: [{
-                        condition: {
-                            maxWidth: 500
-                        },
-                        chartOptions: {
-                            legend: {
-                                layout: 'horizontal',
-                                align: 'center',
-                                verticalAlign: 'bottom'
-                            }
-                        }
-                    }]
-                }
-
-            });
+            // set the HighChart
+            vm.chart = graphComponentOptions.setChart();
             
             vm.convertDateToUTC = function(dateString)  {
                 var date = new Date(dateString);
@@ -99,6 +30,12 @@
             }
             
             vm.setDataSeries = function(type, devLoc, device, hours, startDate, endDate){
+                
+                // clear chart and show loading spinner
+                if (vm.chart.series[0]) {
+                    vm.chart.series[0].setVisible(false, true);
+                }
+                vm.chart.showLoading();
                 // set the data series
                 var loc = (devLoc == constants.RUUVITAG_LOCATION_OUTSIDE? "Outdoor " : "Downstairs "); 
                 vm.chart.setTitle({text: loc + type});
@@ -167,8 +104,11 @@
                         }
                     }  
                     else {
-                        //console.info("I got no data");
+                        //no data
+                        //console.log("no data");
                     }
+                    vm.chart.hideLoading(); // hide spinner
+                    vm.chart.series[0].setVisible(true, false);
                     vm.chart.series[0].setData(dataArray, true);
                     graphService.buttonDisabled = false;
                     graphService.datePickerDisabled = false;
@@ -188,6 +128,7 @@
                 if(weatherObject.device == graphService.device &&
                    weatherObject.devLoc == graphService.devLoc ) {
                         // device and location matches
+                        vm.chart.showLoading();
                         var data = null;
                         var timestamp = vm.convertDateToUTC(new Date(weatherObject.temperature.timestamp).toUTCString());
                         if (graphService.type == constants.TYPE_TEMPERATURE) {
@@ -202,6 +143,7 @@
                         else if (graphService.type == constants.TYPE_BATTERY) {
                             data = weatherObject.battery.voltage;
                         }
+                        vm.chart.hideLoading();
                         vm.chart.series[0].addPoint({
                                                         x: timestamp,
                                                         y: data

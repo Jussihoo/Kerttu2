@@ -57,12 +57,14 @@
             vm.selectedMeasurement = vm.measurements[0];
             
             vm.updateGraph = function(hours) {
-                graphService.buttonDisabled = true;
-                graphService.datePickerDisabled = true;
-                graphService.device = vm.selectedMeasurement.device;
-                graphService.devLoc = vm.selectedMeasurement.loc;
-                graphService.type = vm.selectedMeasurement.type;
-                graphService.hours = hours;
+                if ( hours != graphService.hours ) {
+                    graphService.buttonDisabled = true;
+                    graphService.datePickerDisabled = true;
+                    graphService.device = vm.selectedMeasurement.device;
+                    graphService.devLoc = vm.selectedMeasurement.loc;
+                    graphService.type = vm.selectedMeasurement.type;
+                    graphService.hours = hours;
+                }
             }
             
             vm.setToday = function(picker){
@@ -97,8 +99,6 @@
                 // set endDate by picking only date and ignoring time
                 var endDate = vm.endDate;
                 endDate.setHours(23,59,59,999);
-                console.log(startDate);
-                console.log(endDate);
                 graphService.device = vm.selectedMeasurement.device;
                 graphService.devLoc = vm.selectedMeasurement.loc;
                 graphService.type = vm.selectedMeasurement.type;
@@ -112,7 +112,7 @@
             vm.setToday(0);
             vm.setToday(1);
             
-            // toggle button
+            // toggle datePicker
             $scope.$watch(function () {
                 return graphService.datePickerDisabled;
             }, function (datePickerDisabled) {

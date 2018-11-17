@@ -1,3 +1,12 @@
+html {
+    background-color: white;
+}
+
+.container {
+    max-width:95%;
+    background-color: white;
+}
+
 .navbar {
     //background-color: #e3f2fd;
     background-color: blue;

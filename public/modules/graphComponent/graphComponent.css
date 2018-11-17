@@ -1,0 +1,7 @@
+.highcharts-loading {
+  background: url(/icons/graphspinner.svg);
+  background-size: 6rem 6rem;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+}

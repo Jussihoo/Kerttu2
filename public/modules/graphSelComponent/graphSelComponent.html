@@ -27,7 +27,7 @@
     <div>
         <span class="measurement-sel">
             <select ng-model="vm.selectedMeasurement" ng-change="vm.typeChanged()" ng-options="x.name for x in vm.measurements" ng-disabled="vm.disableButton"></select>
-        <span>
+        </span>
         <button type="button" class="btn btn-primary btn-sm draw-btn" ng-click="vm.getDateRange()" ng-disabled="vm.disableButton">Draw graph</button>
     </div>
 </div>

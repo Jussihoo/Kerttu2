@@ -1,7 +1,7 @@
 
   <div id="outside">
     <div class="locationHeader">Outdoors</div>
-    <td><div id="ruuvi_timestamp">{{ convertToDate(outside.temperature.timestamp) |date: 'EEE dd.MM HH:mm' }}</div></td>
+    <div id="ruuvi_timestamp">{{ convertToDate(outside.temperature.timestamp) |date: 'EEE dd.MM HH:mm' }}</div>
     <div class="col-12 col-lg-8">
         <div class="row">
             <div class="col-12 col-sm-4 col-lg-4" align="center">
@@ -43,12 +43,11 @@
   </div>
 
   <div id="graph">
-    <div class="graphHeader">Graph</div>
+      <div class="graphHeader">Graph</div>
       <div class="col-12 col-lg-9">
         <graph-component></graph-component>
         <graph-selector-component></graph-selector-component>
       </div>
-    </div>
   </div>
 
   <div class="d-lg-none col-12">
