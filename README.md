@@ -4,6 +4,7 @@ Weather station based on Ruuvitags, Raspberry PI 3 B, MEAN, AWS and the lovely F
 
 <br>
   <img width="300" src="https://github.com/Jussihoo/Kerttu2/blob/master/images/weather_screenshot_computer.PNG"
+  <img width="300" src="https://github.com/Jussihoo/Kerttu2/blob/master/images/weather_screenshot2_computer.PNG"
 </br>
 
 <br>
@@ -13,6 +14,16 @@ Weather station based on Ruuvitags, Raspberry PI 3 B, MEAN, AWS and the lovely F
 <br>
   <img width="300" src="https://github.com/Jussihoo/Kerttu2/blob/master/images/weather_screenshot_phone.png"
 </br>
+
+## About Kerttu
+
+Kerttu is based on [Ruuvitags ](https://ruuvi.com/), which are measuring temperature, air pressure and humidity. Also the ruuvitag battery voltage is measured. Ruuvitag is basically a Bluetooth LE beacon, which broadcast the measurements frequently ( I guess it's like once or twice per second).
+
+My python code running in Raspberry wakes up every ten minutes to get these broadcasts and to read the measurement data and then sends those to the server's REST API.
+
+NodeJS based Server is running in AWS. It has REST APIs for receiving the measurements and for fetching the measurements from the MongoDB database, into which these measurements are stored.
+
+UI is implemented with Bootstrap and AngularJS. Scales nicely to phones.
 
 ## Configuring the Ruuvitag bluetooth beacons
 
