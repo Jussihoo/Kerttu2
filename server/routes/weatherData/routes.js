@@ -180,57 +180,62 @@ router.post('/', function(req, res, next) {
 	//console.log("thanks for sending me weatherData");
     ruuvitagSupervision.startSupervision(); // re-start the supervision timer
     
-    var data = req.body;
+    var weatherDataArray = req.body;
     
-    time = new Date();
-    if (data.deviceID == ruuvitag.RUUVITAG) {
-      var location = '';
-      var pushData = {};  // init
-      
-      if (data.locID == ruuvitag.RUUVITAG_LOC_OUTSIDE ) {
-        location = 'outside';
-        pushData['devLoc'] = ruuvitag.RUUVITAG_LOC_OUTSIDE;
-      }
-      else if (data.locID == ruuvitag.RUUVITAG_LOC_INSIDE_1 ) {
-        location = 'inside';
-        pushData['devLoc'] = ruuvitag.RUUVITAG_LOC_INSIDE_1;  
-      }
-      else if (data.locID == ruuvitag.RUUVITAG_LOC_INSIDE_2 ) {
-        location = 'inside';
-        pushData['devLoc'] = ruuvitag.RUUVITAG_LOC_INSIDE_2;  
-      }
-      else {
-        location = 'unknown';
-        pushData['devLoc'] = ruuvitag.RUUVITAG_LOC_UNKNOWN;
-      }
-      pushData['device'] = ruuvitag.RUUVITAG;
-      pushData['time'] = time;
-      
-      if (data.temperature !== undefined ) {
-        //console.log (location+" temperature is " + data.temperature + " ºCelsius");
-        storeWeatherData('temperature', ruuvitag.RUUVITAG, data.locID, data.temperature, time);
-        pushData['temperature'] = data.temperature;
-      }
-      if (data.humidity !== undefined) {
-        //console.log (location+" humidity is " + data.humidity + " %");
-        storeWeatherData('humidity', ruuvitag.RUUVITAG, data.locID, data.humidity, time);
-        pushData['humidity'] = data.humidity;
-      }
-      if (data.pressure !== undefined) {
-        //console.log (location+" pressure is " + data.pressure + " hPa");
-        storeWeatherData('pressure', ruuvitag.RUUVITAG, data.locID, data.pressure, time);
-        pushData['pressure'] = data.pressure;
-      }
-      if (data.battery !== undefined) {
-        //console.log (location+" battery voltage is " + data.battery/1000 + " V");
-        storeWeatherData('battery', ruuvitag.RUUVITAG, data.locID, data.battery, time);
-        pushData['battery'] = data.battery;
-      }
-      // ************************************
-      //var socCom = new socketComms.handleIOComms(server.server);
-      var socCom = server.socCom;
-      socCom.sendData('pushWeatherData', pushData) // send data to client socket
-      // ************************************
+    for (var i=0;i<weatherDataArray.length;i++) {
+        time = new Date(weatherDataArray[i].timestamp*1000) // convert POSIX to JS Date
+        if (weatherDataArray[i].deviceID == ruuvitag.RUUVITAG) {
+          var location = '';
+          var pushData = {};  // init
+
+          if (weatherDataArray[i].locID == ruuvitag.RUUVITAG_LOC_OUTSIDE ) {
+            location = 'outside';
+            pushData['devLoc'] = ruuvitag.RUUVITAG_LOC_OUTSIDE;
+          }
+          else if (weatherDataArray[i].locID == ruuvitag.RUUVITAG_LOC_INSIDE_1 ) {
+            location = 'inside';
+            pushData['devLoc'] = ruuvitag.RUUVITAG_LOC_INSIDE_1;  
+          }
+          else if (weatherDataArray[i].locID == ruuvitag.RUUVITAG_LOC_INSIDE_2 ) {
+            location = 'inside';
+            pushData['devLoc'] = ruuvitag.RUUVITAG_LOC_INSIDE_2;  
+          }
+          else {
+            location = 'unknown';
+            pushData['devLoc'] = ruuvitag.RUUVITAG_LOC_UNKNOWN;
+          }
+          pushData['device'] = ruuvitag.RUUVITAG;
+          pushData['time'] = time;
+
+          if (weatherDataArray[i].temperature !== undefined ) {
+            //console.log (location+" temperature is " + weatherDataArray[i].temperature + " ºCelsius");
+            storeWeatherData('temperature', ruuvitag.RUUVITAG, weatherDataArray[i].locID, weatherDataArray[i].temperature, time);
+            pushData['temperature'] = weatherDataArray[i].temperature;
+          }
+          if (weatherDataArray[i].humidity !== undefined) {
+            //console.log (location+" humidity is " + weatherDataArray[i].humidity + " %");
+            storeWeatherData('humidity', ruuvitag.RUUVITAG, weatherDataArray[i].locID, weatherDataArray[i].humidity, time);
+            pushData['humidity'] = weatherDataArray[i].humidity;
+          }
+          if (weatherDataArray[i].pressure !== undefined) {
+            //console.log (location+" pressure is " + weatherDataArray[i].pressure + " hPa");
+            storeWeatherData('pressure', ruuvitag.RUUVITAG, weatherDataArray[i].locID, weatherDataArray[i].pressure, time);
+            pushData['pressure'] = weatherDataArray[i].pressure;
+          }
+          if (weatherDataArray[i].battery !== undefined) {
+            //console.log (location+" battery voltage is " + weatherDataArray[i].battery/1000 + " V");
+            storeWeatherData('battery', ruuvitag.RUUVITAG, weatherDataArray[i].locID, weatherDataArray[i].battery, time);
+            pushData['battery'] = weatherDataArray[i].battery;
+          }
+          
+          if (i == weatherDataArray.length-1 ) { // send last measurement via socket
+              // ************************************
+              //var socCom = new socketComms.handleIOComms(server.server);
+              var socCom = server.socCom;
+              socCom.sendData('pushWeatherData', pushData) // send data to client socket
+              // ************************************
+          }
+        }
     }
 
 	// Add JSON body to response
