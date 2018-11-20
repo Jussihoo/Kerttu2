@@ -4,6 +4,9 @@ Weather station based on Ruuvitags, Raspberry PI 3 B, MEAN, AWS and the lovely F
 
 <br>
   <img width="300" src="https://github.com/Jussihoo/Kerttu2/blob/master/images/weather_screenshot_computer.PNG"
+</br>
+
+<br>
   <img width="300" src="https://github.com/Jussihoo/Kerttu2/blob/master/images/weather_screenshot2_computer.PNG"
 </br>
 
