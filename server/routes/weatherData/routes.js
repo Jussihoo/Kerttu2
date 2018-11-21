@@ -80,6 +80,7 @@ router.get('/', function(req, res, next) {
                     find(findParams).
                     where({timestamp: {$gte: new Date(new Date().setHours(new Date().getHours()-hours))}}).
                     select({'_id': 0}).
+                    sort({timestamp:1}).
                     exec(handleResponse);
             }
         }
@@ -107,6 +108,7 @@ router.get('/', function(req, res, next) {
                 find(findParams).
                 where({timestamp: {$gte: new Date(Number(startDate)), $lte: new Date(Number(endDate))}}).
                 select({'_id': 0}).
+                sort({timestamp:1}).
                 exec(handleResponse);    
         }
     };

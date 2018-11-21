@@ -1,3 +1,4 @@
+import sys
 import time, datetime
 from ruuvitag_sensor.ruuvi import RuuviTagSensor, RunFlag
 from ruuvitag_sensor.decoder import UrlDecoder
@@ -25,6 +26,8 @@ def send_data(loc_id, found_data):
               'battery': found_data[1]['battery'],
               'timestamp': get_timestamp()}
   data = []
+  global send_buffer_loc_1
+  global send_buffer_loc_2
   if (loc_id == settings.LOC_ID_1 ):
     send_buffer_loc_1.append(postdata)
     data = json.dumps(send_buffer_loc_1)
@@ -34,7 +37,6 @@ def send_data(loc_id, found_data):
 
   req = urllib2.Request(url)
   req.add_header('Content-Type','application/json')
-  data = json.dumps(data)
   timeout = 3
   try:
     response = urllib2.urlopen(req,data,timeout)
@@ -50,28 +52,31 @@ def send_data(loc_id, found_data):
     status = 'nok'
     pass
   except:
-    print 'generic error'
+    print 'generic error', sys.exc_info()[0]
     status = 'nok'
     pass      
   return status
 
 def handle_outside_data(found_data):
+  run_flag_outside.running = False
   #print('MAC ' + found_data[0])
   #print('Ulkomittaukset')
   #print(found_data[1])
   status = send_data(settings.LOC_ID_1, found_data)
   if (status == 'ok'):
+    global send_buffer_loc_1
     send_buffer_loc_1 = []
-  run_flag_outside.running = False
   return
 
 def handle_inside_data(found_data):
+  run_flag_inside.running = False
   #print('MAC ' + found_data[0])
   #print('sisamittaukset')
   #print(found_data[1])
   status = send_data(settings.LOC_ID_2, found_data)
+  if (status == 'ok'):
+    global send_buffer_loc_2
     send_buffer_loc_2 = []
-  run_flag_inside.running = False
   return
 
 def cancel_measurements():
