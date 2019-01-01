@@ -71,6 +71,7 @@
 
             plotOptions: {
                 series: {
+                    turboThreshold: 0,
                     label: {
                         connectorAllowed: false
                     }
